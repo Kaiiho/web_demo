@@ -13,8 +13,9 @@
   grist.onRecord(function(record) {
         document.getElementById('readout').innerHTML = JSON.stringify(record, null, 2);
       });
+  alert("test");
 
-let url = "https://grist-sandbox.beta.numerique.gouv.fr/o/docs/api/profile/apiKey"
+let url = "https://example.com"
 fetch(url, {
   method:'GET'
 })
