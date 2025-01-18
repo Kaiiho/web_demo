@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un message avec postMessage</title>
+</head>
+<body>
+    <h1>Envoyer un message à un site spécifique</h1>
+
+    <!-- Formulaire pour choisir la cible -->
+    <label for="targetOrigin">Cible (targetOrigin) :</label>
+    <input type="text" id="targetOrigin" placeholder="https://exemple.com">
+    <button id="sendMessageBtn">Envoyer le message</button>
+
+    <!-- Balise pour afficher la réponse -->
+    <p id="response">La réponse sera affichée ici.</p>
+
+    <script>
+        window.postMessage("test","https://grist-sandbox.beta.numerique.gouv.fr/o/docs/5FrNMVChAuLr/Untitled-document")
+    </script>
+</body>
+</html>
