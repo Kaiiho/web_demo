@@ -1,0 +1,66 @@
+!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un message avec postMessage</title>
+</head>
+<body>
+    <h1>Envoyer un message à un site spécifique</h1>
+
+    <!-- Formulaire pour choisir la cible -->
+    <label for="targetOrigin">Cible (targetOrigin) :</label>
+    <input type="text" id="targetOrigin" placeholder="https://exemple.com">
+    <button id="sendMessageBtn">Envoyer le message</button>
+
+    <!-- Balise pour afficher la réponse -->
+    <p id="response">La réponse sera affichée ici.</p>
+
+    <script>
+        // Le message à envoyer
+        const message = {
+            "mtype": 1,
+            "reqId": 3,
+            "iface": "GristView",
+            "meth": "fetchSelectedTable",
+            "args": [
+                {
+                    "keepEncoded": false
+                }
+            ]
+        };
+
+        // Sélectionner les éléments
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const targetOriginInput = document.getElementById('targetOrigin');
+        const responseElement = document.getElementById('response');
+
+        // Fonction pour envoyer le message
+        sendMessageBtn.addEventListener('click', () => {
+            // Récupérer la cible saisie par l'utilisateur
+            const targetOrigin = targetOriginInput.value;
+
+            // Vérifier si l'URL est bien saisie
+            if (targetOrigin && targetOrigin.startsWith('https://')) {
+                // Envoyer le message via postMessage
+                window.postMessage(message, targetOrigin);
+                alert('Message envoyé à : ' + targetOrigin);
+            } else {
+                alert('Veuillez saisir une URL valide (commençant par "https://").');
+            }
+        });
+
+        // Écouter les messages entrants
+        window.addEventListener('message', (event) => {
+            // Vérifier l'origine du message pour plus de sécurité
+            const expectedOrigin = targetOriginInput.value;
+            if (event.origin === expectedOrigin) {
+                // Afficher la réponse dans l'élément <p>
+                responseElement.textContent = `Réponse reçue : ${JSON.stringify(event.data)}`;
+            } else {
+                responseElement.textContent = `Message reçu d'une origine non autorisée : ${event.origin}`;
+            }
+        });
+    </script>
+</body>
+</html>
