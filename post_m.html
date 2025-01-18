@@ -1,0 +1,41 @@
+<html>
+    <h1>Post Message Sender</h1>
+        <p>
+            <label for="url">Entrez l'url:</label>
+            <input type="text" id = "url" name="url" value="https://example.com">
+        </p>
+        <button onclick="openWindow()">Ouvre une nouvelle page</button>
+        <p>
+            <label for="message">Entrez le message:</label>
+            <input type="text" id = "message" name="message" value="message">
+        </p>
+        <button onclick="sendMessage()">Envoyer le message</button>
+    
+
+    <script>
+        let windowOpen = null; // Var global
+        function openWindow() {
+            const url = document.getElementById("url").value
+            windowOpen = window.open(url);
+            
+        }
+
+        function sendMessage() {
+            const origin = "https://kaiiho.github.io";
+            // Attend que la page s'ouvre        
+            const message = document.getElementById("message").value
+            windowOpen.postMessage(message,origin);}
+            
+            
+        
+        window.addEventListener("message", receiveMessage, false);
+        function receiveMessage(event) {
+            const newDiv = document.createElement("div");
+            const Sender = document.createTextNode("From: " + event.origin);
+            newDiv.appendChild(Sender);
+            const message = document.createTextNode("Message: " + event.data)
+            newDiv.appendChild(message)
+
+        }
+    </script>
+</html>
